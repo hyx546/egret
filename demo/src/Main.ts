@@ -68,13 +68,13 @@ class Main extends egret.DisplayObjectContainer {
     const stageW: number = this.stage.stageWidth;
     const stageH: number = this.stage.stageHeight;
     const bg = new egret.Shape();
-    bg.graphics.beginFill(0xDB7093); //绘制背景，设定背景大小为应用窗口大小
+    bg.graphics.beginFill(0xdb7093); //绘制背景，设定背景大小为应用窗口大小
     bg.graphics.drawRect(0, 0, stageW, stageH);
     bg.graphics.endFill();
     this.addChild(bg);
     this.banner();
     this.playContent();
-    this.toast()
+    this.toast();
     // // 描述
     // this.textDes = new egret.TextField();
     // this.textDes.text = "点击第一个颜色开始";
@@ -93,7 +93,7 @@ class Main extends egret.DisplayObjectContainer {
     // this.addChild(this.textTimer);
     // this.addChild(this.textDes);
     // 计时器
-    this.timer = new egret.Timer(1000, 30);
+    this.timer = new egret.Timer(1000, 3);
     this.timer.addEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
     this.timer.addEventListener(
       egret.TimerEvent.TIMER_COMPLETE,
@@ -129,8 +129,14 @@ class Main extends egret.DisplayObjectContainer {
    */
   private onTimerComplete(e) {
     this.textDes.text = "这不是极限，刷新再来一次！";
-    // this.createGameScene();
     this.removeEventListener(Circle.Event_Click, this.onClickCircle, this);
+    this.timer.removeEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
+    this.timer.removeEventListener(
+      egret.TimerEvent.TIMER_COMPLETE,
+      this.onTimerComplete,
+      this
+    );
+    this.timer = null;
   }
 
   /**
@@ -141,10 +147,10 @@ class Main extends egret.DisplayObjectContainer {
     // this.addChild(spr);
     // 分数版
     const score = new egret.Sprite();
-    score.graphics.beginFill(0xFFF0F5);
+    score.graphics.beginFill(0xfff0f5);
     score.graphics.drawRect(0, 0, this.stage.stageWidth / 2, 150);
     this.textCount = new egret.TextField();
-    this.textCount.textColor = 0x87CEFA;
+    this.textCount.textColor = 0x87cefa;
     this.textCount.text = "分数：0";
     this.textCount.textAlign = egret.HorizontalAlign.CENTER;
     this.textCount.width = this.stage.stageWidth / 2;
@@ -154,10 +160,10 @@ class Main extends egret.DisplayObjectContainer {
     // 倒计时
     const time = new egret.Sprite();
     time.x = this.stage.stageWidth / 2;
-    time.graphics.beginFill(0xFFF0F5);
+    time.graphics.beginFill(0xfff0f5);
     time.graphics.drawRect(0, 0, this.stage.stageWidth / 2, 150);
     this.textTimer = new egret.TextField();
-    this.textTimer.textColor = 0x87CEFA;
+    this.textTimer.textColor = 0x87cefa;
     this.textTimer.text = "倒计时:30";
     this.textTimer.textAlign = egret.HorizontalAlign.CENTER;
     this.textTimer.width = this.stage.stageWidth / 2;
@@ -187,29 +193,35 @@ class Main extends egret.DisplayObjectContainer {
       }
     }
   }
-  /** 
+  /**
    * 得分颜色
    */
-  private targetCircle(){
+  private targetCircle() {
     const shape = new egret.Shape();
     shape.graphics.beginFill(this.color);
     shape.graphics.drawCircle(0, 0, 25);
     shape.graphics.endFill();
     shape.y = 75;
-    shape.x = this.stage.width/2;
+    shape.x = this.stage.width / 2 - 140;
     this.addChild(shape);
   }
 
-  /** 
+  /**
    * 弹框
    */
-  private toast(){
+  private toast() {
     const toastSpr = new egret.Sprite();
     const rec = new egret.Shape();
-    rec.graphics.beginFill(0xFFFFE0);
-    rec.graphics.drawRoundRect(this.stage.width,this.stage.height,300,300,30);
-    rec.graphics.lineStyle(10, 0x1E90FF);
-    toastSpr.addChild(rec)
-    this.addChildAt(toastSpr,10000)
+    rec.graphics.beginFill(0xffffe0);
+    rec.graphics.drawRoundRect(
+      this.stage.width,
+      this.stage.height,
+      300,
+      300,
+      30
+    );
+    rec.graphics.lineStyle(10, 0x1e90ff);
+    toastSpr.addChild(rec);
+    this.addChildAt(toastSpr, 10000);
   }
 }
