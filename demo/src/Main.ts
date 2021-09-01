@@ -93,7 +93,7 @@ class Main extends egret.DisplayObjectContainer {
     // this.addChild(this.textTimer);
     // this.addChild(this.textDes);
     // 计时器
-    this.timer = new egret.Timer(1000, 3);
+    this.timer = new egret.Timer(1000, 30);
     this.timer.addEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
     this.timer.addEventListener(
       egret.TimerEvent.TIMER_COMPLETE,
