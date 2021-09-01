@@ -74,24 +74,6 @@ class Main extends egret.DisplayObjectContainer {
     this.addChild(bg);
     this.banner();
     this.playContent();
-    this.toast();
-    // // 描述
-    // this.textDes = new egret.TextField();
-    // this.textDes.text = "点击第一个颜色开始";
-    // this.textDes.y = (2 / 3) * stageH + 200;
-    // this.textCount.textAlign =
-    //   this.textTimer.textAlign =
-    //   this.textDes.textAlign =
-    //     egret.HorizontalAlign.CENTER;
-    // this.textCount.width = this.textTimer.width = this.textDes.width = stageW;
-    // this.textCount.textColor =
-    //   this.textTimer.textColor =
-    //   this.textDes.textColor =
-    //     0x000000;
-
-    // this.addChild(this.textCount);
-    // this.addChild(this.textTimer);
-    // this.addChild(this.textDes);
     // 计时器
     this.timer = new egret.Timer(1000, 30);
     this.timer.addEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
