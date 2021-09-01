@@ -184,7 +184,7 @@ class Main extends egret.DisplayObjectContainer {
     shape.graphics.drawCircle(0, 0, 25);
     shape.graphics.endFill();
     shape.y = 75;
-    shape.x = this.stage.width / 2 - 140;
+    shape.x = this.stage.width / 2 - 20;
     this.addChild(shape);
   }
 
