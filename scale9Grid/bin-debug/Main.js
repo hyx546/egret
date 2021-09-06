@@ -121,23 +121,43 @@ var Main = (function (_super) {
      * Create a game scene
      */
     Main.prototype.createGameScene = function () {
-        var img = RES.getRes("bg9_jpg");
-        var bg9Grid = new egret.Bitmap(img);
-        // 九宫格
-        // bg9Grid.width = 600;
-        // bg9Grid.scale9Grid = new egret.Rectangle(70,70,380,380);
-        // 滤镜
-        var color = 0x33ccff; /// 光晕的颜色，十六进制，不包含透明度
-        var alpha = 0.8; /// 光晕的颜色透明度，是对 color 参数的透明度设定。有效值为 0.0 到 1.0。例如，0.8 设置透明度值为 80%。
-        var blurX = 35; /// 水平模糊量。有效值为 0 到 255.0（浮点）
-        var blurY = 35; /// 垂直模糊量。有效值为 0 到 255.0（浮点）
-        var strength = 2; /// 压印的强度，值越大，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现
-        var quality = 3 /* HIGH */; /// 应用滤镜的次数，建议用 BitmapFilterQuality 类的常量来体现
-        var inner = false; /// 指定发光是否为内侧发光，暂未实现
-        var knockout = false; /// 指定对象是否具有挖空效果，暂未实现
-        var glowFilter = new egret.GlowFilter(color, alpha, blurX, blurY, strength, quality, inner, knockout);
-        bg9Grid.filters = [glowFilter];
-        this.addChild(bg9Grid);
+        // const img = RES.getRes("bg9_jpg");
+        // const bg9Grid: egret.Bitmap = new egret.Bitmap(img);
+        // // 九宫格
+        // // bg9Grid.width = 600;
+        // // bg9Grid.scale9Grid = new egret.Rectangle(70,70,380,380);
+        // // 滤镜
+        // const color: number = 0x33ccff; /// 光晕的颜色，十六进制，不包含透明度
+        // const alpha: number = 0.8; /// 光晕的颜色透明度，是对 color 参数的透明度设定。有效值为 0.0 到 1.0。例如，0.8 设置透明度值为 80%。
+        // const blurX: number = 35; /// 水平模糊量。有效值为 0 到 255.0（浮点）
+        // const blurY: number = 35; /// 垂直模糊量。有效值为 0 到 255.0（浮点）
+        // const strength: number = 2; /// 压印的强度，值越大，压印的颜色越深，而且发光与背景之间的对比度也越强。有效值为 0 到 255。暂未实现
+        // const quality: number = egret.BitmapFilterQuality.HIGH; /// 应用滤镜的次数，建议用 BitmapFilterQuality 类的常量来体现
+        // const inner: boolean = false; /// 指定发光是否为内侧发光，暂未实现
+        // const knockout: boolean = false; /// 指定对象是否具有挖空效果，暂未实现
+        // const glowFilter: egret.GlowFilter = new egret.GlowFilter(
+        //   color,
+        //   alpha,
+        //   blurX,
+        //   blurY,
+        //   strength,
+        //   quality,
+        //   inner,
+        //   knockout
+        // );
+        // bg9Grid.filters = [glowFilter]
+        // this.addChild(bg9Grid);
+        // 文本超链接
+        var label = new egret.TextField();
+        // event: 用于输出相应的文字/识别包含该链接的文字段
+        label.textFlow = new egret.HtmlTextParser().parser("<a href=\"event:https://www.baidu.com/\">\u70B9\u6211\u89E6\u53D1\u4E8B\u4EF6 </a>");
+        label.x = 10;
+        label.y = 10;
+        label.touchEnabled = true;
+        label.addEventListener(egret.TextEvent.LINK, function (evt) {
+            console.log(evt.text);
+        }, this);
+        this.addChild(label);
     };
     /**
      * 根据name关键字创建一个Bitmap对象。name属性请参考resources/resource.json配置文件的内容。
