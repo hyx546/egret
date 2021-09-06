@@ -57,6 +57,7 @@ class Main extends egret.DisplayObjectContainer {
    */
   private createGameScene() {
     this.initCicle();
+    const img = RES.getRes("bg_jpg")
   }
 
   /**

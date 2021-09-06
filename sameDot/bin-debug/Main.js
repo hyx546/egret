@@ -120,6 +120,7 @@ var Main = (function (_super) {
      */
     Main.prototype.createGameScene = function () {
         this.initCicle();
+        var img = RES.getRes("bg_jpg");
     };
     /**
      * 初始化
