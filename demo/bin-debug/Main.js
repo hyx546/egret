@@ -188,10 +188,42 @@ var Main = (function (_super) {
         /**
          * BitmapText
          */
-        var bitmapText = new egret.BitmapText();
-        bitmapText.font = RES.getRes('font_fnt');
-        this.addChild(bitmapText);
-        bitmapText.text = '1235632';
+        // const bitmapText = new egret.BitmapText();
+        // bitmapText.font = RES.getRes('font_fnt');
+        // this.addChild(bitmapText);
+        // bitmapText.text = '1235632';
+        /**
+         * 动画
+         */
+        // 逐帧动画
+        // var data = RES.getRes('skip_json');
+        // var tex = RES.getRes('skip_png');
+        // var mcf: egret.MovieClipDataFactory = new egret.MovieClipDataFactory(data, tex);
+        // var mc: egret.MovieClip = new egret.MovieClip(mcf.generateMovieClipData('skip'));
+        // this.addChild(mc);
+        // mc.play();
+        // // 从第三帧播放
+        // // mc.gotoAndPlay(3);
+        // mc.addEventListener(
+        //   egret.Event.COMPLETE,
+        //   (e: egret.Event) => {
+        //     console.log(e.type); //1次
+        //   },
+        //   this
+        // );
+        // 缓动动画
+        // const shp: egret.Shape = new egret.Shape();
+        // shp.graphics.beginFill(0x00ff00);
+        // shp.graphics.drawRect(0, 0, 100, 100);
+        // shp.graphics.endFill();
+        // shp.x = 50;
+        // this.addChild(shp);
+        // egret.Tween.get(shp, { onChange: this.changeCb })
+        //   .to({ x: 100 }, 1000)
+        //   .call((e) => console.log('complete'));
+    };
+    Main.prototype.changeCb = function (e) {
+        console.log('----e', e.target);
     };
     /**
      * 描述文件加载成功，开始播放动画

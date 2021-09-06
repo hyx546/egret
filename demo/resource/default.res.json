@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,bg9_jpg,font_fnt",
+			"keys": "bg_jpg,egret_icon_png,description_json,bg9_jpg,font_fnt,skip_json,skip_png",
 			"name": "preload"
 		}
 	],
@@ -30,6 +30,16 @@
 			"name": "font_fnt",
 			"type": "font",
 			"url": "assets/font.fnt"
+		},
+		{
+			"name": "skip_json",
+			"type": "json",
+			"url": "assets/skip.json"
+		},
+		{
+			"name": "skip_png",
+			"type": "image",
+			"url": "assets/skip.png"
 		}
 	]
 }
