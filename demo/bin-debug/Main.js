@@ -121,7 +121,6 @@ var Main = (function (_super) {
      * Create a game scene
      */
     Main.prototype.createGameScene = function () {
-        var _this = this;
         // const img = RES.getRes("bg9_jpg");
         // const bg9Grid: egret.Bitmap = new egret.Bitmap(img);
         // // 九宫格
@@ -223,15 +222,30 @@ var Main = (function (_super) {
         //   .to({ x: 100 }, 1000)
         //   .call((e) => console.log('complete'));
         /**
-         * websocket
+         * 计时器
          */
-        this.socket = new egret.WebSocket();
-        this.socket.connect('echo.websocket.org', 8080);
-        this.socket.addEventListener(egret.Event.CONNECT, function (e) {
-            console.log('------aa');
-            _this.socket.writeUTF('这是即将发送的数据，为UTF-8编码');
-            _this.socket.flush();
+        // 间隔时间，每隔多长时间生成一次计时器事件
+        var timer = new egret.Timer(3000, 5);
+        // 计时器事件
+        timer.addEventListener(egret.TimerEvent.TIMER, function (e) {
+            timer.delay = timer.delay - 500;
+            console.log(e.type, timer.delay);
         }, this);
+        // 计时器结束事件
+        timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, function (e) { return console.log(e.type); }, this);
+        // 启动
+        timer.start();
+        // 心跳ticker
+        // let tmp: number = 0;
+        // egret.startTick(tickerCb, this);
+        // function tickerCb() {
+        //   console.log('----this.tmp', tmp);
+        //   tmp += 1;
+        //   if (tmp > 120) {
+        //     egret.stopTick(this.tickerCb, this);
+        //   }
+        //   return false;
+        // }
     };
     Main.prototype.complete = function () {
         var msg = this.socket.readUTF();

@@ -155,21 +155,37 @@ class Main extends egret.DisplayObjectContainer {
     //   .to({ x: 100 }, 1000)
     //   .call((e) => console.log('complete'));
     /**
-     * websocket
+     * 计时器
      */
-    this.socket = new egret.WebSocket();
-    this.socket.connect('echo.websocket.org', 8080);
-    this.socket.addEventListener(
-      egret.Event.CONNECT,
+    // 间隔时间，每隔多长时间生成一次计时器事件
+    const timer: egret.Timer = new egret.Timer(3000, 5);
+    // 计时器事件
+    timer.addEventListener(
+      egret.TimerEvent.TIMER,
       (e) => {
-        console.log('------aa');
-
-        this.socket.writeUTF('这是即将发送的数据，为UTF-8编码');
-        this.socket.flush();
+        timer.delay = timer.delay - 500;
+        console.log(e.type, timer.delay);
       },
       this
     );
+    // 计时器结束事件
+    timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, (e) => console.log(e.type), this);
+    // 启动
+    timer.start();
+    // 心跳ticker
+    // let tmp: number = 0;
+    // egret.startTick(tickerCb, this);
+    // function tickerCb() {
+    //   console.log('----this.tmp', tmp);
+    //   tmp += 1;
+    //   if (tmp > 120) {
+    //     egret.stopTick(this.tickerCb, this);
+    //   }
+    //   return false;
+    // }
   }
+
+ 
 
   private complete() {
     const msg = this.socket.readUTF();
