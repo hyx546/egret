@@ -121,6 +121,7 @@ var Main = (function (_super) {
      * Create a game scene
      */
     Main.prototype.createGameScene = function () {
+        var _this = this;
         // const img = RES.getRes("bg9_jpg");
         // const bg9Grid: egret.Bitmap = new egret.Bitmap(img);
         // // 九宫格
@@ -221,6 +222,20 @@ var Main = (function (_super) {
         // egret.Tween.get(shp, { onChange: this.changeCb })
         //   .to({ x: 100 }, 1000)
         //   .call((e) => console.log('complete'));
+        /**
+         * websocket
+         */
+        this.socket = new egret.WebSocket();
+        this.socket.connect('echo.websocket.org', 8080);
+        this.socket.addEventListener(egret.Event.CONNECT, function (e) {
+            console.log('------aa');
+            _this.socket.writeUTF('这是即将发送的数据，为UTF-8编码');
+            _this.socket.flush();
+        }, this);
+    };
+    Main.prototype.complete = function () {
+        var msg = this.socket.readUTF();
+        console.log('------', msg);
     };
     Main.prototype.changeCb = function (e) {
         console.log('----e', e.target);

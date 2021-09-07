@@ -1,4 +1,5 @@
 class Main extends egret.DisplayObjectContainer {
+  private socket: egret.WebSocket;
   public constructor() {
     super();
     this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
@@ -153,6 +154,26 @@ class Main extends egret.DisplayObjectContainer {
     // egret.Tween.get(shp, { onChange: this.changeCb })
     //   .to({ x: 100 }, 1000)
     //   .call((e) => console.log('complete'));
+    /**
+     * websocket
+     */
+    this.socket = new egret.WebSocket();
+    this.socket.connect('echo.websocket.org', 8080);
+    this.socket.addEventListener(
+      egret.Event.CONNECT,
+      (e) => {
+        console.log('------aa');
+
+        this.socket.writeUTF('这是即将发送的数据，为UTF-8编码');
+        this.socket.flush();
+      },
+      this
+    );
+  }
+
+  private complete() {
+    const msg = this.socket.readUTF();
+    console.log('------', msg);
   }
 
   private changeCb(e) {
